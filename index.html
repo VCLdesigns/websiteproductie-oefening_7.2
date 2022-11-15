@@ -220,18 +220,20 @@
 
         gridTegels.forEach(gridTegel => {
             var gridTekst = gridTegel.querySelector("h3");
-            var random = Math.random();
+            var randomPic = Math.floor(Math.random() * (1200 - 1) + 1);
+            var randomWidth = Math.floor(window.innerWidth / 2);
             gridTegel.addEventListener("mouseenter", deOpdrachtAan);
             function deOpdrachtAan(evt) {
 
                 gridTekst.classList.toggle("verborgen");
+                gridTegel.classList.toggle("achtergrond");
+
                 if (gridTegel.classList.contains("grid_height_200")) {
-                    gridTegel.classList.toggle("achtergrond");
-                    gridTegel.style.backgroundImage = "url('https://picsum.photos/1000/200?random=" + random + "')";
+                    gridTegel.style.backgroundImage = "url('https://picsum.photos/" + randomWidth + "/200?random=" + randomPic + ".jpg')";
                 } else {
-                    gridTegel.classList.toggle("achtergrond")
-                    gridTegel.style.backgroundImage = "url('https://picsum.photos/1000/400?random=" + random + "')";
+                    gridTegel.style.backgroundImage = "url('https://picsum.photos/" + randomWidth + "/400?random=" + randomPic + ".jpg')";
                 }
+                
 
             }
 
@@ -241,13 +243,11 @@
             gridTegel.addEventListener("mouseleave", deOpdrachtUit);
             function deOpdrachtUit(evt) {
                 gridTekst.classList.toggle("verborgen");
-                if (gridTegel.classList.contains("grid_height_200")) {
-                    gridTegel.classList.toggle("achtergrond");
-                    gridTegel.style.backgroundImage = null;
-                } else {  gridTegel.classList.toggle("achtergrond")
-                    gridTegel.style.backgroundImage = null; }
-            }
+                gridTegel.classList.toggle("achtergrond");
+                gridTegel.style.removeProperty("background-image");
+                
 
+            }
         });
 
 
